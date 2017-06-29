@@ -1,0 +1,6 @@
+﻿<UserControl x:Class="Editor.Controls.MapDesigner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Editor.Controls">
+    <Grid x:Name="grdTiles" ShowGridLines="{Binding IsGridVisible}" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="grdTiles_MouseMove" MouseLeftButtonDown="grdTiles_MouseLeftButtonDown"/>
+</UserControl>

@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -90,11 +90,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\NewMap.xaml.cs">
+    <Compile Include="Controls\LayerSelector.xaml.cs">
+      <DependentUpon>LayerSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MapDesigner.xaml.cs">
+      <DependentUpon>MapDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NewMap.xaml.cs">
       <DependentUpon>NewMap.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Texture.xaml.cs">
+    <Compile Include="Models\Texture.xaml.cs">
       <DependentUpon>Texture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextureSelector.xaml.cs">
+      <DependentUpon>TextureSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="TileEngine\TileLayer.cs" />
@@ -102,11 +111,23 @@
     <Compile Include="TileEngine\TileSet.cs" />
     <Compile Include="Validation\UrlRule.cs" />
     <Compile Include="Validation\NumberRule.cs" />
-    <Page Include="Controls\NewMap.xaml">
+    <Page Include="Controls\LayerSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Texture.xaml">
+    <Page Include="Controls\MapDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Models\Texture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TextureSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

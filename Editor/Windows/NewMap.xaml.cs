@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using Microsoft.Win32;
 
-namespace Editor.Controls
+namespace Editor.Windows
 {
     /// <summary>
     /// Interaction logic for NewMap.xaml

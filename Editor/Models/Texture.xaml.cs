@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Editor.Controls
+namespace Editor.Models
 {
     /// <summary>
     /// Interaction logic for Texture.xaml
