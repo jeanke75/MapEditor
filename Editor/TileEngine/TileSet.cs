@@ -4,43 +4,26 @@ namespace Editor.TileEngine
 {
     public class TileSet
     {
+        #region Fields
         public int TilesWide = 8;
         public int TilesHigh = 8;
         public int TileWidth = 32;
         public int TileHeight = 32;
-
-        #region Fields and Properties
-
-        Bitmap image;
-        string imageName;
-        Rectangle[] sourceRectangles;
-
         #endregion
 
         #region Property Region
-        public Bitmap Texture
-        {
-            get { return image; }
-            set { image = value; }
-        }
+        public Bitmap Texture { get; set; }
 
-        public string TextureName
-        {
-            get { return imageName; }
-            set { imageName = value; }
-        }
-        
-        public Rectangle[] SourceRectangles
-        {
-            get { return sourceRectangles; }
-        }
+        public string TextureName { get; set; }
+
+        public Rectangle[] SourceRectangles { get; }
         #endregion
 
         #region Constructor Region
 
         public TileSet()
         {
-            sourceRectangles = new Rectangle[TilesWide * TilesHigh];
+            SourceRectangles = new Rectangle[TilesWide * TilesHigh];
 
             int tile = 0;
 
@@ -48,7 +31,7 @@ namespace Editor.TileEngine
             for (int y = 0; y < TilesHigh; y++)
                 for (int x = 0; x < TilesWide; x++)
                 {
-                    sourceRectangles[tile] = new Rectangle(
+                    SourceRectangles[tile] = new Rectangle(
                         x * TileWidth,
                         y * TileHeight,
                         TileWidth,
@@ -64,14 +47,14 @@ namespace Editor.TileEngine
             TileWidth = tileWidth;
             TileHeight = tileHeight;
 
-            sourceRectangles = new Rectangle[TilesWide * TilesHigh];
+            SourceRectangles = new Rectangle[TilesWide * TilesHigh];
 
             int tile = 0;
 
             for (int y = 0; y < TilesHigh; y++)
                 for (int x = 0; x < TilesWide; x++)
                 {
-                    sourceRectangles[tile] = new Rectangle(
+                    SourceRectangles[tile] = new Rectangle(
                         x * TileWidth,
                         y * TileHeight,
                         TileWidth,

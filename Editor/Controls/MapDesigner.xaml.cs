@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Editor.Models;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Editor.Models;
 using static Editor.MainWindow;
 
 namespace Editor.Controls
@@ -95,29 +95,32 @@ namespace Editor.Controls
         public void Draw(int x, int y)
         {
             Texture t = main.ctrlTextureSelector.GetSelectedTexture();
-            switch (main.ctrlLayerSelector.GetSelectedLayer())
+            if (t != null)
             {
-                case Layer.Background:
-                    if (main.currentMap.GetGroundTile(x, y) == t.ID) return;
-                    main.currentMap.SetGroundTile(x, y, t.ID);
-                    break;
-                case Layer.Edge:
-                    if (main.currentMap.GetEdgeTile(x, y) == t.ID) return;
-                    main.currentMap.SetEdgeTile(x, y, t.ID);
-                    break;
-                case Layer.Building:
-                    if (main.currentMap.GetBuildingTile(x, y) == t.ID) return;
-                    main.currentMap.SetBuildingTile(x, y, t.ID);
-                    break;
-                case Layer.Decoration:
-                    if (main.currentMap.GetDecorationTile(x, y) == t.ID) return;
-                    main.currentMap.SetDecorationTile(x, y, t.ID);
-                    break;
-                default:
-                    throw new NotImplementedException("This layer can't be handled in Draw()");
-            }
+                switch (main.ctrlLayerSelector.GetSelectedLayer())
+                {
+                    case Layer.Background:
+                        if (main.currentMap.GetGroundTile(x, y) == t.ID) return;
+                        main.currentMap.SetGroundTile(x, y, t.ID);
+                        break;
+                    case Layer.Edge:
+                        if (main.currentMap.GetEdgeTile(x, y) == t.ID) return;
+                        main.currentMap.SetEdgeTile(x, y, t.ID);
+                        break;
+                    case Layer.Building:
+                        if (main.currentMap.GetBuildingTile(x, y) == t.ID) return;
+                        main.currentMap.SetBuildingTile(x, y, t.ID);
+                        break;
+                    case Layer.Decoration:
+                        if (main.currentMap.GetDecorationTile(x, y) == t.ID) return;
+                        main.currentMap.SetDecorationTile(x, y, t.ID);
+                        break;
+                    default:
+                        throw new NotImplementedException("This layer can't be handled in Draw()");
+                }
 
-            DrawTile(x, y, main.ctrlLayerSelector.GetSelectedLayer());
+                DrawTile(x, y, main.ctrlLayerSelector.GetSelectedLayer());
+            }
         }
 
         private void DrawTile(int x, int y, Layer layer)
@@ -125,8 +128,10 @@ namespace Editor.Controls
             Image img = grdTiles.Children.OfType<Image>().Where(o => Grid.GetColumn(o) == x && Grid.GetRow(o) == y && (Layer)o.Tag == layer).FirstOrDefault();
             if (img == null)
             {
-                img = new Image();
-                img.Tag = layer;
+                img = new Image
+                {
+                    Tag = layer
+                };
                 grdTiles.Children.Add(img);
                 Grid.SetZIndex(img, (int)layer);
                 Grid.SetRow(img, y);
@@ -160,10 +165,7 @@ namespace Editor.Controls
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

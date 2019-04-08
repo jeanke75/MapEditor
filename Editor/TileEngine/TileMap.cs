@@ -2,85 +2,35 @@
 {
     public class TileMap
     {
+
         #region Field Region
-
-        string mapName;
-        TileLayer groundLayer;
-        TileLayer edgeLayer;
-        TileLayer buildingLayer;
-        TileLayer decorationLayer;
-        //Dictionary<string, Point> characters;
-        //CharacterManager characterManager;
-        //PortalLayer portalLayer;
-
-        int mapWidth;
-        int mapHeight;
-
-        TileSet tileSet;
-
         #endregion
 
         #region Property Region
-        public string MapName
-        {
-            get { return mapName; }
-            private set { mapName = value; }
-        }
+        public string MapName { get; private set; }
 
-        public TileSet TileSet
-        {
-            get { return tileSet; }
-            set { tileSet = value; }
-        }
+        public TileSet TileSet { get; set; }
 
-        public TileLayer GroundLayer
-        {
-            get { return groundLayer; }
-            set { groundLayer = value; }
-        }
+        public TileLayer GroundLayer { get; set; }
 
-        public TileLayer EdgeLayer
-        {
-            get { return edgeLayer; }
-            set { edgeLayer = value; }
-        }
+        public TileLayer EdgeLayer { get; set; }
 
-        public TileLayer BuildingLayer
-        {
-            get { return buildingLayer; }
-            set { buildingLayer = value; }
-        }
+        public TileLayer BuildingLayer { get; set; }
 
-        /*public PortalLayer PortalLayer
-        {
-            get { return portalLayer; }
-            private set { portalLayer = value; }
-        }*/
+        public TileLayer DecorationLayer { get; set; }
 
-        /*public Dictionary<string, Point> Characters
-        {
-            get { return characters; }
-            private set { characters = value; }
-        }*/
+        public int MapWidth { get; }
 
-        public int MapWidth
-        {
-            get { return mapWidth; }
-        }
-
-        public int MapHeight
-        {
-            get { return mapHeight; }
-        }
+        public int MapHeight { get; }
 
         public int WidthInPixels
         {
-            get { return mapWidth * 32; }
+            get { return MapWidth * 32; }
         }
 
         public int HeightInPixels
         {
-            get { return mapHeight * 32; }
+            get { return MapHeight * 32; }
         }
 
         #endregion
@@ -91,14 +41,10 @@
         {
         }
 
-        private TileMap(TileSet tileSet, string mapName/*, PortalLayer portals = null*/)
+        private TileMap(TileSet tileSet, string mapName)
         {
-            //this.characters = new Dictionary<string, Point>();
-            this.tileSet = tileSet;
-            this.mapName = mapName;
-            //characterManager = CharacterManager.Instance;
-
-            //portalLayer = portals != null ? portals : new PortalLayer();
+            TileSet = tileSet;
+            MapName = mapName;
         }
 
         public TileMap(
@@ -107,17 +53,16 @@
             TileLayer edgeLayer,
             TileLayer buildingLayer,
             TileLayer decorationLayer,
-            string mapName/*,
-            PortalLayer portalLayer = null*/)
-            : this(tileSet, mapName/*, portalLayer*/)
+            string mapName)
+            : this(tileSet, mapName)
         {
-            this.groundLayer = groundLayer;
-            this.edgeLayer = edgeLayer;
-            this.buildingLayer = buildingLayer;
-            this.decorationLayer = decorationLayer;
+            GroundLayer = groundLayer;
+            EdgeLayer = edgeLayer;
+            BuildingLayer = buildingLayer;
+            DecorationLayer = decorationLayer;
 
-            mapWidth = groundLayer.Width;
-            mapHeight = groundLayer.Height;
+            MapWidth = groundLayer.Width;
+            MapHeight = groundLayer.Height;
         }
 
         #endregion
@@ -126,73 +71,73 @@
 
         public void SetGroundTile(int x, int y, int index)
         {
-            groundLayer.SetTile(x, y, index);
+            GroundLayer.SetTile(x, y, index);
         }
 
         public int GetGroundTile(int x, int y)
         {
-            return groundLayer.GetTile(x, y);
+            return GroundLayer.GetTile(x, y);
         }
 
         public void SetEdgeTile(int x, int y, int index)
         {
-            edgeLayer.SetTile(x, y, index);
+            EdgeLayer.SetTile(x, y, index);
         }
 
         public int GetEdgeTile(int x, int y)
         {
-            return edgeLayer.GetTile(x, y);
+            return EdgeLayer.GetTile(x, y);
         }
 
         public void SetBuildingTile(int x, int y, int index)
         {
-            buildingLayer.SetTile(x, y, index);
+            BuildingLayer.SetTile(x, y, index);
         }
 
         public int GetBuildingTile(int x, int y)
         {
-            return buildingLayer.GetTile(x, y);
+            return BuildingLayer.GetTile(x, y);
         }
 
         public void SetDecorationTile(int x, int y, int index)
         {
-            decorationLayer.SetTile(x, y, index);
+            DecorationLayer.SetTile(x, y, index);
         }
 
         public int GetDecorationTile(int x, int y)
         {
-            return decorationLayer.GetTile(x, y);
+            return DecorationLayer.GetTile(x, y);
         }
 
         public void FillEdges()
         {
-            for (int y = 0; y < mapHeight; y++)
+            for (int y = 0; y < MapHeight; y++)
             {
-                for (int x = 0; x < mapWidth; x++)
+                for (int x = 0; x < MapWidth; x++)
                 {
-                    edgeLayer.SetTile(x, y, -1);
+                    EdgeLayer.SetTile(x, y, -1);
                 }
             }
         }
 
         public void FillBuilding()
         {
-            for (int y = 0; y < mapHeight; y++)
+            for (int y = 0; y < MapHeight; y++)
             {
-                for (int x = 0; x < mapWidth; x++)
+                for (int x = 0; x < MapWidth; x++)
                 {
-                    buildingLayer.SetTile(x, y, -1);
+                    BuildingLayer.SetTile(x, y, -1);
                 }
             }
         }
 
         public void FillDecoration()
         {
-            for (int y = 0; y < mapHeight; y++)
+            for (int y = 0; y < MapHeight; y++)
             {
-                for (int x = 0; x < mapWidth; x++)
+                for (int x = 0; x < MapWidth; x++)
                 {
-                    decorationLayer.SetTile(x, y, -1);
+                    DecorationLayer.SetTile(x, y, -1);
                 }
             }
         }

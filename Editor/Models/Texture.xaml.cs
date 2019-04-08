@@ -11,14 +11,13 @@ namespace Editor.Models
     /// </summary>
     public partial class Texture : UserControl
     {
-        byte id;
-        public byte ID { get { return id; } }
+        public byte ID { get; }
 
         public Texture(byte id, Bitmap img)
         {
             InitializeComponent();
             MouseLeftButtonDown += Control_MouseClick;
-            this.id = id;
+            ID = id;
             imgTexture.Source = Extensions.ImageSourceForBitmap(img);
             brdSelected.BorderBrush = null;
         }

@@ -1,6 +1,6 @@
-﻿using System.Drawing;
+﻿using Editor.TileEngine;
+using System.Drawing;
 using System.IO;
-using Editor.TileEngine;
 
 namespace Editor
 {

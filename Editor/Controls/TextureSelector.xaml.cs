@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Editor.Models;
+using Editor.TileEngine;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Editor.Models;
-using Editor.TileEngine;
 
 namespace Editor.Controls
 {

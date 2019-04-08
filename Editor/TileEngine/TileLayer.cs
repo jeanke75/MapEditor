@@ -1,21 +1,10 @@
-﻿using System.Drawing;
-
-namespace Editor.TileEngine
+﻿namespace Editor.TileEngine
 {
     public class TileLayer
     {
         #region Field Region
 
-        int[] tiles;
-
-        int width;
-        int height;
-
-        System.Drawing.Point cameraPoint;
-        System.Drawing.Point viewPoint;
-        System.Drawing.Point min;
-        System.Drawing.Point max;
-        Rectangle destination;
+        private readonly int[] tiles;
 
         #endregion
 
@@ -25,17 +14,9 @@ namespace Editor.TileEngine
 
         public bool Visible { get; set; }
 
-        public int Width
-        {
-            get { return width; }
-            private set { width = value; }
-        }
+        public int Width { get; private set; }
 
-        public int Height
-        {
-            get { return height; }
-            private set { height = value; }
-        }
+        public int Height { get; private set; }
 
         #endregion
 
@@ -51,16 +32,16 @@ namespace Editor.TileEngine
             : this()
         {
             this.tiles = (int[])tiles.Clone();
-            this.width = width;
-            this.height = height;
+            Width = width;
+            Height = height;
         }
 
         public TileLayer(int width, int height)
             : this()
         {
             tiles = new int[height * width];
-            this.width = width;
-            this.height = height;
+            Width = width;
+            Height = height;
 
             for (int y = 0; y < height; y++)
             {
@@ -75,8 +56,8 @@ namespace Editor.TileEngine
             : this()
         {
             tiles = new int[height * width];
-            this.width = width;
-            this.height = height;
+            Width = width;
+            Height = height;
 
             for (int y = 0; y < height; y++)
             {
@@ -96,10 +77,10 @@ namespace Editor.TileEngine
             if (x < 0 || y < 0)
                 return -1;
 
-            if (x >= width || y >= height)
+            if (x >= Width || y >= Height)
                 return -1;
 
-            return tiles[y * width + x];
+            return tiles[y * Width + x];
         }
 
         public void SetTile(int x, int y, int tileIndex)
@@ -107,10 +88,10 @@ namespace Editor.TileEngine
             if (x < 0 || y < 0)
                 return;
 
-            if (x >= width || y >= height)
+            if (x >= Width || y >= Height)
                 return;
 
-            tiles[y * width + x] = tileIndex;
+            tiles[y * Width + x] = tileIndex;
         }
         #endregion
     }
